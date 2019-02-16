@@ -6,7 +6,7 @@
       プリズムラッシュ！LIVE』の「ならびかえ」ミニゲームの練習をするためのアプリです。
     </p>
     <p>
-      <router-link to="/game">
+      <router-link to="/game/やってみた">
         <button class="button is-success">ゲームをやってみる！</button>
       </router-link>
     </p>
