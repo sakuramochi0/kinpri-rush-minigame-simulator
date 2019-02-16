@@ -8,21 +8,37 @@
       ></b-icon>
     </router-link>
     <header>
-      <img :src="`../../static/${emojiFilename}`" :alt="emojiFilename" />
+      <template v-if="isFinished && isCollect">
+        <img
+          src="../../static/emoji-party-popper.png"
+          alt="emoji-party-popper"
+        />
+      </template>
+      <template v-else-if="isFinished && !isCollect">
+        <img
+          src="../../static/emoji-face-with-cold-sweat.png"
+          alt="emoji-face-with-cold-sweat"
+        />
+      </template>
+      <template v-else>
+        <img src="../../static/emoji-ice-skate.png" alt="emoji-ice-skate" />
+      </template>
 
       <!-- ゲーム結果 -->
       <div class="star-box">
         <span v-for="(result, i) in results" :key="i">
-          <img
-            v-if="result"
-            src="../../static/emoji-growing-star.png"
-            alt="growing star emoji"
-          />
-          <img
-            v-else
-            src="../../static/emoji-milky-way.png"
-            alt="growing star emoji"
-          />
+          <template v-if="result">
+            <img
+              src="../../static/emoji-growing-star.png"
+              alt="growing star emoji"
+            />
+          </template>
+          <template v-else>
+            <img
+              src="../../static/emoji-milky-way.png"
+              alt="growing star emoji"
+            />
+          </template>
         </span>
       </div>
     </header>
@@ -38,6 +54,9 @@
     <!-- 選択肢 -->
     <div class="select-characters">
       <div class="columns first-column">
+        <!-- >= tablet の場合に上の行が左に寄るのを防ぐために挿入 -->
+        <div class="column is-hidden-mobile"></div>
+
         <div
           class="character-button-box column"
           v-for="(char, i) in message.slice(0, 2)"
@@ -49,6 +68,9 @@
             {{ char }}
           </span>
         </div>
+
+        <!-- >= tablet の場合に上の行が左に寄るのを防ぐために挿入 -->
+        <div class="column is-hidden-mobile"></div>
       </div>
 
       <!-- 選択肢2 -->
@@ -238,6 +260,7 @@ p {
 
 .select-characters {
   max-width: 350px;
+  margin: auto;
 }
 
 .character-button-box {
