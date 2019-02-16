@@ -29,5 +29,20 @@ new Vue({
       },
       { ref: 'shortcut icon', href: 'https://skrm.ch/favicon.ico' },
     ],
+    script: [
+      {
+        async: true,
+        src: 'https://www.googletagmanager.com/gtag/js?id=UA-7053288-4',
+      },
+      {
+        inner: `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-7053288-4');
+  `,
+      },
+    ],
   },
 });
