@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <header>👑</header>
     <router-view />
   </div>
 </template>
@@ -13,7 +12,16 @@ export default {
 
 <style>
 header {
-  font-size: 150px;
+  padding: 20px 0;
+  height: 260px;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+p {
+  margin: 2em;
 }
 
 #app {
@@ -22,7 +30,14 @@ header {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-  font-size: 20px;
+  font-size: 16px;
+  padding: 0 2em;
+  height: 100vh;
+
+  /* wallpaper */
+  background-color: #fcfcfc;
+  background-image: url('../static/rainbow-star-wallpaper.jpg');
+  background-size: 100% 240px;
+  background-repeat: no-repeat;
 }
 </style>
