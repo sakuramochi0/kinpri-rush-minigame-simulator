@@ -29,10 +29,10 @@
     </p>
 
     <p>
-      <b-icon icon="note"></b-icon>
-      作ったコード:<br />
+      書いたコード:
       <a href="https://github.com/sakuramochi0/kinpri-rush-minigame-simulator">
-        github.com/sakuramochi0/kinpri-rush-minigame-simulator
+        <b-icon icon="note"></b-icon>
+        GitHub
       </a>
     </p>
 
@@ -53,10 +53,6 @@ export default {
 </script>
 
 <style scoped>
-a {
-  color: #0074d9;
-}
-
 header {
   padding: 60px;
   margin-bottom: 1em;

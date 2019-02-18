@@ -1,33 +1,20 @@
 <template>
   <div id="app">
     <router-view />
-    <social-sharing
-      url="https://sakuramochi0.github.io/kinpri-rush-minigame-simulator/"
-      title="⛸ キンプリラッシュやってみたアプリ | kinpri-rush-minigame-simulator"
-      hashtags="キンプリラッシュやってみたアプリ"
-      inline-template
-    >
-      <div>
-        <network network="twitter">
-          <button class="button twitter">
-            <b-icon icon="twitter" />
-            <span>ツイートする</span>
-          </button>
-        </network>
-      </div>
-    </social-sharing>
+    <app-footer />
   </div>
 </template>
 
 <script>
-import BIcon from 'buefy/src/components/icon/Icon';
+import AppFooter from '@/components/AppFooter';
 
 export default {
   name: 'App',
-  components: { BIcon },
+  components: { AppFooter },
 };
 </script>
 
+<!--suppress CssUnusedSymbol -->
 <style>
 header {
   padding: 20px 0;
@@ -35,15 +22,21 @@ header {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 28px;
+  margin-bottom: 1em;
 }
 
 p {
-  margin: 2em;
+  margin-bottom: 1em;
+}
+
+a {
+  color: #0074d9;
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Hiragino Maru Gothic Pro', 'Avenir', Helvetica, Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
