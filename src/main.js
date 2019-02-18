@@ -3,6 +3,7 @@
 import Vue from 'vue';
 import Buefy from 'buefy';
 import VueHead from 'vue-head';
+import SocialSharing from 'vue-social-sharing';
 import 'buefy/dist/buefy.css';
 
 import App from './App';
@@ -10,6 +11,7 @@ import router from './router';
 
 Vue.use(Buefy);
 Vue.use(VueHead);
+Vue.use(SocialSharing);
 
 Vue.config.productionTip = false;
 
