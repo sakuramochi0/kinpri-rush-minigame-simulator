@@ -17,7 +17,8 @@
     "buefy": "^0.7.2",
     "vue": "^2.5.2",
     "vue-head": "^2.1.1",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-social-sharing": "^2.3.4"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
