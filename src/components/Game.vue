@@ -42,7 +42,12 @@
         </span>
       </div>
     </header>
-    <h1>スタァを応援しよう！</h1>
+
+    <!-- 成績 -->
+    <p class="statistics">
+      あなたの成績: {{ successCount }}/{{ totalCount }} ＝ 成功率
+      {{ successRate }} %
+    </p>
 
     <!-- タップした文字 -->
     <div class="tapped-char-box">
@@ -89,6 +94,8 @@
       </div>
     </div>
 
+    <h1 v-show="!isFinished">想いを叫ぼう！</h1>
+
     <!-- 次の練習ボタン -->
     <p>
       <button
@@ -109,12 +116,6 @@
         <b-icon icon="fire"></b-icon>
         <span>Next Challenge !!</span>
       </button>
-    </p>
-
-    <!-- 成績 -->
-    <p>
-      あなたの成績: {{ successCount }}/{{ totalCount }} ＝ 成功率
-      {{ successRate }} %
     </p>
   </div>
 </template>
@@ -165,18 +166,6 @@ export default {
       }
       return Math.floor((this.successCount / this.totalCount) * 100);
     },
-
-    emojiFilename() {
-      if (!this.isFinished) {
-        return 'emoji-ice-skate.png';
-      }
-
-      if (this.isCollect) {
-        return 'emoji-party-popper.png';
-      }
-
-      return 'emoji-face-with-cold-sweat.png';
-    },
   },
 
   methods: {
@@ -215,6 +204,11 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
 .back-icon {
   position: absolute;
   top: 5px;
@@ -231,21 +225,9 @@ export default {
   height: 30px;
 }
 
-h1 {
-  font-size: 25px;
-}
-
-h1 {
-  margin: 1em;
-}
-
-p {
-  margin: 2em;
-}
-
 .tapped-char-box {
   display: inline-flex;
-  height: 100px;
+  margin-bottom: 1em;
 }
 
 .tapped-char {
@@ -260,16 +242,21 @@ p {
 
 .select-characters {
   max-width: 350px;
-  margin: auto;
+  margin: 0 auto 1em;
+}
+
+.select-characters .columns {
+  margin-bottom: 0;
 }
 
 .character-button-box {
   display: inline-flex;
+  padding: 0.5em;
 }
 
 .character-button {
-  width: 60px;
-  height: 60px;
+  width: 62px;
+  height: 62px;
   margin: 0.25em;
   border: solid gold 3px;
   border-radius: 2em;
