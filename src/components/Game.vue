@@ -1,87 +1,12 @@
 <template>
   <div id="game">
-    <router-link to="/">
-      <b-icon
-        icon="arrow-left-bold-circle-outline"
-        class="back-icon"
-        size="is-large"
-      ></b-icon>
-    </router-link>
-
-    <header>
-      <!-- トップ絵文字 -->
-      <template v-if="isFinished && isCollect">
-        <img
-          src="../../static/emoji-party-popper.png"
-          alt="emoji-party-popper"
-        />
-      </template>
-      <template v-else-if="isFinished && !isCollect">
-        <img
-          src="../../static/emoji-face-with-cold-sweat.png"
-          alt="emoji-face-with-cold-sweat"
-        />
-      </template>
-      <template v-else>
-        <img src="../../static/emoji-ice-skate.png" alt="emoji-ice-skate" />
-      </template>
-
-      <!-- ゲーム結果の絵文字 -->
-      <div class="star-box">
-        <!-- 20 回以下の場合-->
-        <div v-if="results.length <= 20">
-          <span v-for="(result, i) in results" :key="i">
-            <template v-if="result">
-              <img
-                src="../../static/emoji-growing-star.png"
-                alt="growing star emoji"
-              />
-            </template>
-            <template v-else>
-              <img
-                src="../../static/emoji-milky-way.png"
-                alt="growing star emoji"
-              />
-            </template>
-          </span>
-        </div>
-
-        <!-- 20 回より多い場合-->
-        <div v-else>
-          <p>
-            <img
-              src="../../static/emoji-growing-star.png"
-              alt="growing star emoji"
-            />
-            × {{ successCount }}
-            <img
-              src="../../static/emoji-milky-way.png"
-              alt="growing star emoji"
-            />
-            × {{ failedCount }}
-          </p>
-          <span
-            v-for="(result, i) in results.slice(-10)"
-            :key="i"
-            :style="`opacity: ${0.2 * (i + 1)}`"
-          >
-            <template v-if="result"
-              ><img
-                src="../../static/emoji-growing-star.png"
-                alt="growing star emoji"
-              />
-            </template>
-
-            <template v-else>
-              <img
-                src="../../static/emoji-milky-way.png"
-                alt="growing star emoji"
-              />
-            </template>
-          </span>
-        </div>
-      </div>
-    </header>
+    <game-header
+      :failed-count="failedCount"
+      :is-collect="isCollect"
+      :is-finished="isFinished"
+      :results="results"
+      :success-count="successCount"
+    />
 
     <!-- タップした文字 -->
     <div class="tapped-char-box">
@@ -91,100 +16,38 @@
     </div>
 
     <!-- 選択肢 -->
-    <div class="select-characters">
-      <div class="columns first-column">
-        <!-- >= tablet の場合に上の行が左に寄るのを防ぐために挿入 -->
-        <div class="column is-hidden-mobile"></div>
-
-        <div
-          class="character-button-box column"
-          v-for="(char, i) in message.slice(0, 2)"
-          :key="`char-${i}`"
-          :id="`char-${i}`"
-          @click="tapCharacter(char, i)"
-        >
-          <span class="character-button">
-            {{ char }}
-          </span>
-        </div>
-
-        <!-- >= tablet の場合に上の行が左に寄るのを防ぐために挿入 -->
-        <div class="column is-hidden-mobile"></div>
-      </div>
-
-      <!-- 選択肢2 -->
-      <div class="columns second-column">
-        <div
-          class="character-button-box column"
-          v-for="(char, i) in message.slice(2)"
-          :key="`char-${i + 2}`"
-          :id="`char-${i + 2}`"
-          @click="tapCharacter(char, i + 2)"
-        >
-          <span class="character-button">
-            {{ char }}
-          </span>
-        </div>
-      </div>
-    </div>
+    <select-characters :message="message" @tap-character="tapCharacter" />
 
     <h1 v-show="!isFinished">想いを叫ぼう！</h1>
 
     <!-- 次の練習ボタン -->
-    <p>
-      <button
-        v-if="isCollect"
-        class="button is-success"
-        v-show="isFinished"
-        @click="nextChallenge"
-      >
-        <b-icon icon="star"></b-icon>
-        <span>Next Challenge !!</span>
-      </button>
-      <button
-        v-else
-        class="button is-danger"
-        v-show="isFinished"
-        @click="nextChallenge"
-      >
-        <b-icon icon="fire"></b-icon>
-        <span>Next Challenge !!</span>
-      </button>
-    </p>
+    <next-challenge-button
+      :is-collect="isCollect"
+      :is-finished="isFinished"
+      @next-challenge="nextChallenge"
+    />
 
     <hr />
 
     <!-- 成績 -->
-    <p class="statistics">
-      あなたの成績: {{ successCount }}/{{ totalCount }} ＝ 成功率
-      {{ successRate }} %
-    </p>
-
-    <social-sharing
-      v-if="totalCount > 0"
-      :title="tweetText"
-      url="https://sakuramochi0.github.io/kinpri-rush-minigame-simulator/"
-      hashtags="キンプリラッシュやってみたアプリ"
-      inline-template
-    >
-      <p>
-        <network network="twitter">
-          <button class="button twitter">
-            <b-icon icon="twitter" />
-            <span>成績をツイートする</span>
-          </button>
-        </network>
-      </p>
-    </social-sharing>
+    <results
+      :success-count="successCount"
+      :success-rate="successRate"
+      :total-count="totalCount"
+      :results="results"
+    />
   </div>
 </template>
 
 <script>
-import BIcon from 'buefy/src/components/icon/Icon';
+import GameHeader from '@/components/GameHeader';
+import SelectCharacters from '@/components/SelectCharacters';
+import NextChallengeButton from '@/components/NextChallengeButton';
+import Results from '@/components/Results';
 
 export default {
   name: 'Game',
-  components: { BIcon },
+  components: { Results, NextChallengeButton, SelectCharacters, GameHeader },
   props: {},
 
   data() {
@@ -229,18 +92,6 @@ export default {
       }
       return Math.floor((this.successCount / this.totalCount) * 100);
     },
-
-    tweetText() {
-      return `あなたは ${
-        this.successCount
-      } 個のスタァ🌟を手に入れました！ 成功率は ${this.successRate} % (${
-        this.successCount
-      }/${this.totalCount}) です！\n${this.resultsEmoji}\n\n${document.title}`;
-    },
-
-    resultsEmoji() {
-      return this.results.map(result => (result ? '🌟' : '🌌')).join('');
-    },
   },
 
   methods: {
@@ -284,23 +135,6 @@ h1 {
   font-weight: bold;
 }
 
-.back-icon {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  color: lightgray;
-}
-
-.star-box {
-  width: 300px;
-  margin: auto;
-  color: whitesmoke;
-}
-
-.star-box img {
-  height: 30px;
-}
-
 .tapped-char-box {
   display: inline-flex;
   margin-bottom: 1em;
@@ -313,34 +147,6 @@ h1 {
   width: 50px;
   height: 50px;
   font-size: 27px;
-  font-weight: bold;
-}
-
-.select-characters {
-  max-width: 350px;
-  margin: 0 auto 1em;
-}
-
-.select-characters .columns {
-  margin-bottom: 0;
-}
-
-.character-button-box {
-  display: inline-flex;
-  padding: 0.5em;
-}
-
-.character-button {
-  width: 62px;
-  height: 62px;
-  margin: 0.25em;
-  border: solid gold 3px;
-  border-radius: 2em;
-
-  /* font */
-  text-align: center;
-  font-size: 40px;
-  color: darkgoldenrod;
   font-weight: bold;
 }
 </style>
