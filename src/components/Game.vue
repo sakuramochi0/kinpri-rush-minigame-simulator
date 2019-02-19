@@ -7,7 +7,9 @@
         size="is-large"
       ></b-icon>
     </router-link>
+
     <header>
+      <!-- トップ絵文字 -->
       <template v-if="isFinished && isCollect">
         <img
           src="../../static/emoji-party-popper.png"
@@ -24,30 +26,62 @@
         <img src="../../static/emoji-ice-skate.png" alt="emoji-ice-skate" />
       </template>
 
-      <!-- ゲーム結果 -->
+      <!-- ゲーム結果の絵文字 -->
       <div class="star-box">
-        <span v-for="(result, i) in results" :key="i">
-          <template v-if="result">
+        <!-- 20 回以下の場合-->
+        <div v-if="results.length <= 20">
+          <span v-for="(result, i) in results" :key="i">
+            <template v-if="result">
+              <img
+                src="../../static/emoji-growing-star.png"
+                alt="growing star emoji"
+              />
+            </template>
+            <template v-else>
+              <img
+                src="../../static/emoji-milky-way.png"
+                alt="growing star emoji"
+              />
+            </template>
+          </span>
+        </div>
+
+        <!-- 20 回より多い場合-->
+        <div v-else>
+          <p>
             <img
               src="../../static/emoji-growing-star.png"
               alt="growing star emoji"
             />
-          </template>
-          <template v-else>
+            × {{ successCount }}
             <img
               src="../../static/emoji-milky-way.png"
               alt="growing star emoji"
             />
-          </template>
-        </span>
+            × {{ failedCount }}
+          </p>
+          <span
+            v-for="(result, i) in results.slice(-10)"
+            :key="i"
+            :style="`opacity: ${0.2 * (i + 1)}`"
+          >
+            <template v-if="result"
+              ><img
+                src="../../static/emoji-growing-star.png"
+                alt="growing star emoji"
+              />
+            </template>
+
+            <template v-else>
+              <img
+                src="../../static/emoji-milky-way.png"
+                alt="growing star emoji"
+              />
+            </template>
+          </span>
+        </div>
       </div>
     </header>
-
-    <!-- 成績 -->
-    <p class="statistics">
-      あなたの成績: {{ successCount }}/{{ totalCount }} ＝ 成功率
-      {{ successRate }} %
-    </p>
 
     <!-- タップした文字 -->
     <div class="tapped-char-box">
@@ -120,7 +154,14 @@
 
     <hr />
 
+    <!-- 成績 -->
+    <p class="statistics">
+      あなたの成績: {{ successCount }}/{{ totalCount }} ＝ 成功率
+      {{ successRate }} %
+    </p>
+
     <social-sharing
+      v-if="totalCount > 0"
       :title="tweetText"
       url="https://sakuramochi0.github.io/kinpri-rush-minigame-simulator/"
       hashtags="キンプリラッシュやってみたアプリ"
@@ -174,6 +215,10 @@ export default {
       return this.results.filter(result => result).length;
     },
 
+    failedCount() {
+      return this.totalCount - this.successCount;
+    },
+
     totalCount() {
       return this.results.length;
     },
@@ -188,9 +233,9 @@ export default {
     tweetText() {
       return `あなたは ${
         this.successCount
-      } 個のスタァ🌟を手に入れました！ 成功率は ${this.successRate} % です！\n${
-        this.resultsEmoji
-      }\n\n${document.title}`;
+      } 個のスタァ🌟を手に入れました！ 成功率は ${this.successRate} % (${
+        this.successCount
+      }/${this.totalCount}) です！\n${this.resultsEmoji}\n\n${document.title}`;
     },
 
     resultsEmoji() {
@@ -249,6 +294,7 @@ h1 {
 .star-box {
   width: 300px;
   margin: auto;
+  color: whitesmoke;
 }
 
 .star-box img {

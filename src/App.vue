@@ -19,7 +19,7 @@ header {
 
 h1 {
   font-size: 28px;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 p {
