@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="about">
     <header>
       <img src="../../static/emoji-crown.png" alt="crown emoji" />
     </header>
@@ -40,15 +40,19 @@
       壁紙:
       <a href="https://pixabay.com/photo-755962/">Pixabay by Osckar</a>
     </p>
+
+    <app-footer />
   </div>
 </template>
 
 <script>
 import BIcon from 'buefy/src/components/icon/Icon';
 
+import AppFooter from '@/components/AppFooter';
+
 export default {
   name: 'About',
-  components: { BIcon },
+  components: { BIcon, AppFooter },
 };
 </script>
 
