@@ -117,15 +117,19 @@
         <span>Next Challenge !!</span>
       </button>
     </p>
+
+    <app-footer :success-count="successCount" :success-rate="successRate" />
   </div>
 </template>
 
 <script>
 import BIcon from 'buefy/src/components/icon/Icon';
 
+import AppFooter from '@/components/AppFooter';
+
 export default {
   name: 'Game',
-  components: { BIcon },
+  components: { BIcon, AppFooter },
   props: {},
 
   data() {
