@@ -118,18 +118,32 @@
       </button>
     </p>
 
-    <app-footer :success-count="successCount" :success-rate="successRate" />
+    <hr />
+
+    <social-sharing
+      :title="tweetText"
+      url="https://sakuramochi0.github.io/kinpri-rush-minigame-simulator/"
+      hashtags="キンプリラッシュやってみたアプリ"
+      inline-template
+    >
+      <p>
+        <network network="twitter">
+          <button class="button twitter">
+            <b-icon icon="twitter" />
+            <span>成績をツイートする</span>
+          </button>
+        </network>
+      </p>
+    </social-sharing>
   </div>
 </template>
 
 <script>
 import BIcon from 'buefy/src/components/icon/Icon';
 
-import AppFooter from '@/components/AppFooter';
-
 export default {
   name: 'Game',
-  components: { BIcon, AppFooter },
+  components: { BIcon },
   props: {},
 
   data() {
@@ -169,6 +183,18 @@ export default {
         return 0;
       }
       return Math.floor((this.successCount / this.totalCount) * 100);
+    },
+
+    tweetText() {
+      return `あなたは ${
+        this.successCount
+      } 個のスタァ🌟を手に入れました！ 成功率は ${this.successRate} % です！\n${
+        this.resultsEmoji
+      }\n\n${document.title}`;
+    },
+
+    resultsEmoji() {
+      return this.results.map(result => (result ? '🌟' : '🌌')).join('');
     },
   },
 
