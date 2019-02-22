@@ -69,13 +69,15 @@ export default {
   width: 62px;
   height: 62px;
   margin: 0.25em;
-  border: solid gold 3px;
+  border: solid #cdb161 3px;
   border-radius: 2em;
 
   /* font */
+  color: white;
+  background-color: #9b864d;
+  text-shadow: none;
   text-align: center;
   font-size: 40px;
-  color: darkgoldenrod;
   font-weight: bold;
 }
 </style>

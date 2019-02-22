@@ -10,8 +10,12 @@
 
     <!-- タップした文字 -->
     <div class="tapped-char-box">
-      <div class="tapped-char" v-for="i in [0, 1, 2, 3, 4]" :key="i">
-        {{ tappedCharacters[i] }}
+      <div
+        :class="{ 'tapped-char': true, 'question-mark': !tappedCharacters[i] }"
+        v-for="i in [0, 1, 2, 3, 4]"
+        :key="i"
+      >
+        {{ tappedCharacters[i] || '？' }}
       </div>
     </div>
 
@@ -129,10 +133,54 @@ export default {
 };
 </script>
 
+<!--suppress CssUnusedSymbol -->
 <style scoped>
+#game {
+  color: #9b864d;
+  text-shadow: rgb(255, 255, 255) 3px 0 0,
+    rgb(255, 255, 255) 2.83487px 0.981584px 0,
+    rgb(255, 255, 255) 2.35766px 1.85511px 0,
+    rgb(255, 255, 255) 1.62091px 2.52441px 0,
+    rgb(255, 255, 255) 0.705713px 2.91581px 0,
+    rgb(255, 255, 255) -0.287171px 2.98622px 0,
+    rgb(255, 255, 255) -1.24844px 2.72789px 0,
+    rgb(255, 255, 255) -2.07227px 2.16926px 0,
+    rgb(255, 255, 255) -2.66798px 1.37182px 0,
+    rgb(255, 255, 255) -2.96998px 0.42336px 0,
+    rgb(255, 255, 255) -2.94502px -0.571704px 0,
+    rgb(255, 255, 255) -2.59586px -1.50383px 0,
+    rgb(255, 255, 255) -1.96093px -2.27041px 0,
+    rgb(255, 255, 255) -1.11013px -2.78704px 0,
+    rgb(255, 255, 255) -0.137119px -2.99686px 0,
+    rgb(255, 255, 255) 0.850987px -2.87677px 0,
+    rgb(255, 255, 255) 1.74541px -2.43999px 0,
+    rgb(255, 255, 255) 2.44769px -1.73459px 0,
+    rgb(255, 255, 255) 2.88051px -0.838247px 0;
+}
+
 h1 {
   font-size: 40px;
   font-weight: bold;
+  color: #f0fdff;
+  text-shadow: rgb(41, 184, 237) 3px 0 0,
+    rgb(41, 184, 237) 2.83487px 0.981584px 0,
+    rgb(41, 184, 237) 2.35766px 1.85511px 0,
+    rgb(41, 184, 237) 1.62091px 2.52441px 0,
+    rgb(41, 184, 237) 0.705713px 2.91581px 0,
+    rgb(41, 184, 237) -0.287171px 2.98622px 0,
+    rgb(41, 184, 237) -1.24844px 2.72789px 0,
+    rgb(41, 184, 237) -2.07227px 2.16926px 0,
+    rgb(41, 184, 237) -2.66798px 1.37182px 0,
+    rgb(41, 184, 237) -2.96998px 0.42336px 0,
+    rgb(41, 184, 237) -2.94502px -0.571704px 0,
+    rgb(41, 184, 237) -2.59586px -1.50383px 0,
+    rgb(41, 184, 237) -1.96093px -2.27041px 0,
+    rgb(41, 184, 237) -1.11013px -2.78704px 0,
+    rgb(41, 184, 237) -0.137119px -2.99686px 0,
+    rgb(41, 184, 237) 0.850987px -2.87677px 0,
+    rgb(41, 184, 237) 1.74541px -2.43999px 0,
+    rgb(41, 184, 237) 2.44769px -1.73459px 0,
+    rgb(41, 184, 237) 2.88051px -0.838247px 0;
 }
 
 .tapped-char-box {
@@ -142,11 +190,16 @@ h1 {
 
 .tapped-char {
   border: solid 2px lightgray;
-  margin: 5px;
-  padding: 5px;
-  width: 50px;
-  height: 50px;
-  font-size: 27px;
+  margin: 1px;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
   font-weight: bold;
+}
+
+.tapped-char.question-mark {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: none;
 }
 </style>
