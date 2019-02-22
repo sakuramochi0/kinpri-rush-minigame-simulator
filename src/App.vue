@@ -30,6 +30,10 @@ a {
   color: #0074d9;
 }
 
+html {
+  height: 100%;
+}
+
 #app {
   font-family: 'Hiragino Maru Gothic Pro', 'Avenir', Helvetica, Arial,
     sans-serif;
@@ -40,7 +44,7 @@ a {
   color: white;
 
   padding: 0 2em;
-  height: 120%;
+  height: 100%;
 
   /* wallpaper */
   background-color: black;
