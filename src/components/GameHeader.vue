@@ -102,7 +102,7 @@ export default {
   position: absolute;
   top: 5px;
   left: 5px;
-  color: lightgray;
+  color: #b3e5fc;
 }
 
 .star-box {

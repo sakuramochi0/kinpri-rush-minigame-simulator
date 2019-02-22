@@ -36,13 +36,14 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   font-size: 16px;
+  color: white;
+
   padding: 0 2em;
-  height: 100vh;
+  height: 120%;
 
   /* wallpaper */
-  background-color: #fcfcfc;
+  background-color: black;
   background-image: url('../static/rainbow-star-wallpaper.jpg');
   background-size: 100% 240px;
   background-repeat: no-repeat;
