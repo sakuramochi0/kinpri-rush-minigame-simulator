@@ -1,6 +1,15 @@
+
 # kinpri-rush-minigame-simulator
 
-> Mini-game simulator for \"KING OF PRISM Prism Rush! Live\".
+「KING OF PRISM プリズムラッシュ！LIVE（キンプリラッシュ）」のミニゲームシミュレータです⛸✨
+
+## Screenshots
+
+<div style="display: inline-block">
+  <img width="300" alt="sakuramochi0 github io_kinpri-rush-minigame-simulator_(Pixel 2) (2)" src="https://user-images.githubusercontent.com/6568716/126862812-4e4fbf48-13b2-47a6-9b41-ba2b5328c00a.png">
+  <img width="300" alt="sakuramochi0 github io_kinpri-rush-minigame-simulator_(Pixel 2) (1)" src="https://user-images.githubusercontent.com/6568716/126862817-9ff1eb3d-bbf0-480a-9350-c9b989514824.png">
+  <img width="300" alt="sakuramochi0 github io_kinpri-rush-minigame-simulator_(Pixel 2)" src="https://user-images.githubusercontent.com/6568716/126862818-0286532b-1461-4816-aad0-4e7db846b10e.png">
+</div>
 
 ## Build Setup
 
