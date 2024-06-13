@@ -5,22 +5,12 @@
       {{ successRate }} %
     </p>
 
-    <social-sharing
-      v-if="totalCount > 0"
-      :title="tweetText"
-      url="https://sakuramochi0.github.io/kinpri-rush-minigame-simulator/"
-      hashtags="キンプリラッシュやってみたアプリ"
-      inline-template
-    >
-      <p>
-        <network network="twitter">
-          <button class="button twitter">
-            <b-icon icon="twitter" />
-            <span>成績をツイートする</span>
-          </button>
-        </network>
-      </p>
-    </social-sharing>
+    <p>
+      <button class="button share" @click="shareResult">
+        <b-icon icon="share" />
+        <span>成績を共有する</span>
+      </button>
+    </p>
   </div>
 </template>
 
@@ -37,16 +27,28 @@ export default {
     results: { type: Array },
   },
   computed: {
-    tweetText() {
+    shareText() {
       return `あなたは ${
         this.successCount
       } 個のスタァ🌟を手に入れました！ 成功率は ${this.successRate} % (${
         this.successCount
-      }/${this.totalCount}) です！\n${this.resultsEmoji}\n\n${document.title}`;
+      }/${this.totalCount}) です！\n${this.resultsEmoji}\n\n${
+        document.title
+      }\n#キンプリラッシュやってみたアプリ`;
     },
 
     resultsEmoji() {
-      return this.results.map(result => (result ? '🌟' : '🌌')).join('');
+      return this.results.map(result => (result ? '🌟' : '🌌'))
+        .join('');
+    },
+  },
+  methods: {
+    shareResult() {
+      navigator.share({
+        title: 'キンプリラッシュやってみたアプリ',
+        url: 'https://skrm.ch/kinpri-rush-minigame-simulator/',
+        text: this.shareText,
+      });
     },
   },
 };

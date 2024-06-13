@@ -53,11 +53,11 @@ body {
   background-repeat: no-repeat;
 }
 
-.button.twitter,
-.button.twitter:hover {
+.button.share,
+.button.share:hover {
   color: white;
   font-size: 16px;
   padding: 0 16px;
-  background-color: #1da1f2;
+  background-color: #82c5ff;
 }
 </style>
