@@ -53,8 +53,8 @@ body {
   background-repeat: no-repeat;
 }
 
-.button.share,
-.button.share:hover {
+.button.copy,
+.button.copy:hover {
   color: white;
   font-size: 16px;
   padding: 0 16px;

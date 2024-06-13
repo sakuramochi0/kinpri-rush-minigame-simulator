@@ -5,10 +5,10 @@
       {{ successRate }} %
     </p>
 
-    <p>
-      <button class="button share" @click="shareResult">
-        <b-icon icon="share" />
-        <span>成績を共有する</span>
+    <p v-if="results.length > 0">
+      <button class="button copy" @click="copyResult">
+        <b-icon icon="clipboard" />
+        <span>成績をコピーする</span>
       </button>
     </p>
   </div>
@@ -27,14 +27,14 @@ export default {
     results: { type: Array },
   },
   computed: {
-    shareText() {
+    copyText() {
       return `あなたは ${
         this.successCount
       } 個のスタァ🌟を手に入れました！ 成功率は ${this.successRate} % (${
         this.successCount
       }/${this.totalCount}) です！\n${this.resultsEmoji}\n\n${
         document.title
-      }\n#キンプリラッシュやってみたアプリ`;
+      }\n#キンプリラッシュやってみたアプリ\nhttps://skrm.ch/kinpri-rush-minigame-simulator/`;
     },
 
     resultsEmoji() {
@@ -43,15 +43,13 @@ export default {
     },
   },
   methods: {
-    shareResult() {
-      navigator.share({
-        title: 'キンプリラッシュやってみたアプリ',
-        url: 'https://skrm.ch/kinpri-rush-minigame-simulator/',
-        text: this.shareText,
+    copyResult() {
+      navigator.permissions.query({ name: 'clipboard-write' }).then((result) => {
+        if (result.state === 'granted' || result.state === 'prompt') {
+          navigator.clipboard.writeText(this.copyText);
+        }
       });
     },
   },
 };
 </script>
-
-<style scoped></style>
