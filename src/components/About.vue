@@ -22,9 +22,9 @@
 
     <p>
       作者:
-      <a href="https://twitter.com/skrmch_rhythpri/">
-        <b-icon icon="twitter"></b-icon>
-        さくらもち (@skrmch_rhythpri)
+      <a href="https://skrm.ch/">
+        <b-icon icon="home"></b-icon>
+        さくらもち (@sakuramochi0)
       </a>
     </p>
 
